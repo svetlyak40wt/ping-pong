@@ -4,11 +4,15 @@ This is a Ping Pong game written in Common Lisp
 Originally this game was written by Free_Air_Lines YouTube user and
 presented in this video:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Sbw7PyfGh2w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Common Lisp Ping Pong](http://img.youtube.com/vi/Sbw7PyfGh2w/0.jpg)](http://www.youtube.com/watch?v=Sbw7PyfGh2w "Common Lisp Ping Pong")
 
 
 Downloads
 =========
+
+Download a ready to use binary from the [Releases](https://github.com/svetlyak40wt/ping-pong/releases/latest) page.
+
+Right not there are builds for OSX only.
 
 
 How to build
