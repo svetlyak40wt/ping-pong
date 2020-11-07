@@ -2,20 +2,39 @@
 
 (load-all-patches)
 
-(compile-file "pong-6-utf8.lisp"
-              :load t
-              :external-format :utf-8)
+(require 'asdf)
+
+(multiple-value-bind (path warns-p fail-p)
+    (compile-file "game.lisp"
+                  :load t
+                  :external-format :utf-8)
+  (when fail-p
+    (error "Compilation Error")))
 
 
-(ping-pong:start2)
+(let* ((app-path "~/Desktop/PingPong.app")
+       (resources-path
+         (merge-pathnames "Contents/Resources/"
+                          (concatenate 'string app-path "/")))
+       (bundle (create-macos-application-bundle
+                app-path
+                ;; Do not copy file associations...
+                :document-types nil
+                ;; ...or CFBundleIdentifier from the LispWorks bundle
+                :identifier "com.example.PingPong")))
+  (loop for file in (uiop/filesystem:directory-files "." "*.wav")
+        for destination-path = (make-pathname
+                                :name (pathname-name file)
+                                :type (pathname-type file)
+                                :defaults resources-path)
+        do (uiop/stream:copy-file file destination-path))
 
-(deliver 'ping-pong:start2 
-         (create-macos-application-bundle
-          "~/Desktop/PingPong.app"
-          ;; Do not copy file associations...
-          :document-types nil
-          ;; ...or CFBundleIdentifier from the LispWorks bundle
-          :identifier "com.example.PingPong")
-         ;; level
-         0
-         :interface :capi)
+  (deliver 'ping-pong:start 
+           bundle
+           ;; level of compression
+           ;; from 0 to 5 where 5 is resulting the
+           ;; smallest binary
+           5
+           :interface :capi
+           ;; To suppress LispWork's splash screen
+           :startup-bitmap-file nil))
