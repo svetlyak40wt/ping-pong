@@ -1,7 +1,7 @@
 This is a Ping Pong game written in Common Lisp
 ===============================================
 
-Originally this game was written by Free_Air_Lines YouTube user and
+Originally this game was written by [Free_Air_Lines](https://www.youtube.com/channel/UCm3E2CyxTfKWRLX0Uh8i3Qg) YouTube user and
 presented in this video:
 
 [![Common Lisp Ping Pong](http://img.youtube.com/vi/Sbw7PyfGh2w/0.jpg)](http://www.youtube.com/watch?v=Sbw7PyfGh2w "Common Lisp Ping Pong")
